@@ -24,6 +24,29 @@ public class Test_Projet {
     mockedProject = Mockito.spy(projet);
   }
 
+
+  @Disabled
+  @Nested
+  @DisplayName("Regroupement de tests unitaire calculResteAEmprunter")
+  public class TestCalculResteAEmprunter{
+    @ParameterizedTest
+    @MethodSource("getArgsCalculResteAEmprunter")
+    public void testCalculResteAEmprunter(double calcTotal, double calcApportMin, double result){
+      Mockito.doReturn(calcTotal).when(mockedProject).calculTotalProjetAchat();
+      Mockito.doReturn(calcApportMin).when(mockedProject).calculApportMinimal();
+
+      Assertions.assertEquals(result, mockedProject.calculResteAEmprunter());
+    }
+
+    static Stream<Arguments> getArgsCalculResteAEmprunter(){
+      return Stream.of(
+        Arguments.arguments(100_000.00, 10_000.00, 90_000.00)
+      );
+    }
+  }
+
+
+  @Disabled
   @Nested
   @DisplayName("Regroupement de tests unitaire calculTotalProjetAchat")
   public class TestCalculTotalProjetAchat {
