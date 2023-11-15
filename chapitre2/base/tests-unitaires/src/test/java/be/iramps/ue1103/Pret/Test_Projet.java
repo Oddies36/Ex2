@@ -46,7 +46,7 @@ public class Test_Projet {
   }
 
 
-  @Disabled
+  //@Disabled
   @Nested
   @DisplayName("Regroupement de tests unitaire calculTotalProjetAchat")
   public class TestCalculTotalProjetAchat {
@@ -92,8 +92,14 @@ public class Test_Projet {
     static Stream<Arguments> getArgsCalculTotalProjetAchatErrorMsg() {
       return Stream.of(
           Arguments.arguments(-100_000.00, -50_000.00, -100_000.00, "Valeur ne peut pas être négatif"),
+          Arguments.arguments(100_000.00, 50_000.00, -100_000.00, "Valeur ne peut pas être négatif"),
+          Arguments.arguments(100_000.00, -50_000.00, 100_000.00, "Valeur ne peut pas être négatif"),
+          Arguments.arguments(-100_000.00, 50_000.00, 100_000.00, "Valeur ne peut pas être négatif"),
           Arguments.arguments(Double.MAX_VALUE, 5_000.00, 10_000.00, "Valeur est trop grande"),
-          Arguments.arguments(Double.MIN_VALUE, 5_000.00, 10_000.00, "Valeur ne peut pas être négatif"));
+          Arguments.arguments(Double.MIN_VALUE, 5_000.00, 10_000.00, "Valeur ne peut pas être négatif"),
+          Arguments.arguments(0.00, 5_000.00, 10_000.00, "Valeur est trop grande"),
+          Arguments.arguments(200_000.00, 0.00, 10_000.00, "Valeur est trop grande")
+          );
     }
   }
 }
