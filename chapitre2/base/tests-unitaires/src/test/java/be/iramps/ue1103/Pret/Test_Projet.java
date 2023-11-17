@@ -18,10 +18,15 @@ public class Test_Projet {
   private static Projet projet;
   private static Projet mockedProject;
 
+  private static Pret pret;
+  private static Pret mockedPret;
+
   @BeforeAll
   public static void init() {
     projet = new Projet();
+    pret = new Pret();
     mockedProject = Mockito.spy(projet);
+    mockedPret = Mockito.spy(pret);
   }
 
   @Disabled
@@ -43,6 +48,22 @@ public class Test_Projet {
       () -> {
         mockedProject.setRevenuCadastral(700);
         Assertions.assertEquals(700, mockedProject.getRevenuCadastral());
+      },
+      () -> {
+        mockedPret.setFraisDossierBancaire(500);
+        Assertions.assertEquals(500, mockedPret.getFraisDossierBancaire());
+      },
+      () -> {
+        mockedPret.setFraisNotaireCredit(7_000.00);
+        Assertions.assertEquals(7_000.00, mockedPret.getFraisNotaireCredit());
+      },
+      () -> {
+        mockedPret.setNombreAnnees(20);
+        Assertions.assertEquals(20, mockedPret.getNombreAnnees());
+      },
+      () -> {
+        mockedPret.setTauxAnnuel(0.05);
+        Assertions.assertEquals(0.05, mockedPret.getTauxAnnuel());
       }
     );
   }
